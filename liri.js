@@ -26,7 +26,7 @@ switch (nodeArgs1) {
         randomTxt();
         break;
     default:
-        //if no user input for argument 1 play "Maybe IDK"
+        //if no user input for the arguments play the song "Maybe IDK"
         nodeArgs2 = ("Maybe IDK")
         spotifier(nodeArgs2);
 
@@ -58,25 +58,43 @@ function tweeter() {
     });
 }
 
-//function to display data from OMDB API
+//function to display the following data from OMDB API:
+// * Title of the movie.
+// * Year the movie came out.
+// * IMDB Rating of the movie.
+// * Country where the movie was produced.
+// * Language of the movie.
+// * Plot of the movie.
+// * Actors in the movie.
+// * Rotten Tomatoes Rating.
+
 function moviegoer() {
     var movie = "";
-    console.log('moviegoer');
     //check for user input
     if (nodeArgs2 === undefined) {
         //if no movie is inputted then use Mr. Nobody
         movie = ("Mr. Nobody");
-        console.log(movie);
-        console.log('false');
+        nodeArgs2 = movie
     } else {
         //assign movie name from user input to variable for search
         movie = nodeArgs2;
-        console.log(movie);
-        console.log('true');
     }
+
+    request("http://www.omdbapi.com/?t=" + nodeArgs2 + "&y=&plot=short&r=json", function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            console.log("Movie name: " + JSON.parse(body).Title);
+            console.log("Movie year: " + JSON.parse(body).Year);
+            console.log("Movie rating: " + JSON.parse(body).imdbRating);
+            console.log("Country where movie was produced: " + JSON.parse(body).Country);
+            console.log("Movie language: " + JSON.parse(body).Language);
+            console.log("Movie plot: " + JSON.parse(body).Plot);
+            console.log("Movie actors: " + JSON.parse(body).Actors);
+            console.log("Movie Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+        }
+    });
 }
 
-//function to grab user inputted song from Spotify and play it
+//function to grab user input song name from Spotify and play it
 function spotifier() {
     var song = "";
     console.log('spotifier');
@@ -98,7 +116,6 @@ function spotifier() {
 //function to grab data from random.txt to be used as parameters called in the appropriate function
 function randomTxt() {
     fs.readFile("random.txt", "utf8", function(error, data) {
-        //console.log(data);
         //split data from random.txt using comma and store in an Array for use as parameters for function call
         var dataArr = data.split(",");
         console.log(dataArr);
