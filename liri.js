@@ -8,6 +8,7 @@ var fs = require('fs');
 var nodeArgs1 = process.argv[2];
 var nodeArgs2 = process.argv[3];
 
+
 //create a series of functions executed based on the user's input using their first input parameter
 switch (nodeArgs1) {
     case 'POTUS-tweets':
@@ -97,13 +98,22 @@ function spotifier() {
 //function to grab data from random.txt to be used as parameters called in the appropriate function
 function randomTxt() {
     fs.readFile("random.txt", "utf8", function(error, data) {
-        console.log(data);
+        //console.log(data);
         //split data from random.txt using comma and store in an Array for use as parameters for function call
         var dataArr = data.split(",");
         console.log(dataArr);
         console.log(dataArr[0], dataArr[1]);
+        nodeArgs1 = (dataArr[0]);
+        nodeArgs2 = (dataArr[1]);
 
-        //function((dataArr[0]), (dataArr[1]));
+        // for (i = 0; i < dataArr.length; i++) {
+        //nodeArgs1 = (dataArr[i]);
+        // nodeArgs2 = (dataArr[i]);
+        // }
+        console.log(nodeArgs1);
+        console.log(nodeArgs2);
 
-    })
+        spotifier(nodeArgs2)
+
+    });
 }
