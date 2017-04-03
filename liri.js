@@ -11,7 +11,7 @@ var nodeArgs2 = process.argv[3];
 
 //create a series of functions executed based on the user's input using their first input parameter
 switch (nodeArgs1) {
-    case 'POTUS-tweets':
+    case 'my-tweets':
         tweeter();
         break;
     case 'spotify-this-song':
@@ -89,7 +89,13 @@ function moviegoer() {
             console.log("Movie language: " + JSON.parse(body).Language);
             console.log("Movie plot: " + JSON.parse(body).Plot);
             console.log("Movie actors: " + JSON.parse(body).Actors);
-            console.log("Movie Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            //add a check to see if there is a rotten tomatoes rating for this movie
+            if (JSON.parse(body).Ratings.length > 1) {
+                console.log("Movie Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            } else {
+                console.log("There is no Rotten Tomatoes Rating for this movie");
+            }
+
         }
     });
 }
