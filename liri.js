@@ -90,12 +90,12 @@ function moviegoer() {
             console.log("Movie plot: " + JSON.parse(body).Plot);
             console.log("Movie actors: " + JSON.parse(body).Actors);
             //add a check to see if there is a rotten tomatoes rating for this movie
-            if (JSON.parse(body).Ratings.length > 1) {
+
+            if (JSON.parse(body).Ratings !== undefined && JSON.parse(body).Ratings.length > 1) {
                 console.log("Movie Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
             } else {
-                console.log("There is no Rotten Tomatoes Rating for this movie");
+                console.log('A "Rotten Tomatoes Rating" is not available for this movie.');
             }
-
         }
     });
 }
