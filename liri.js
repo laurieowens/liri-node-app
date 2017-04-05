@@ -108,7 +108,8 @@ function spotifier() {
     if (nodeArgs2 === undefined) {
         //if no user input for song, assign a song
         song = ("The Sign");
-        console.log(song);
+        nodeArgs2 = song;
+        console.log(nodeArgs2);
         console.log('false');
     } else {
         //assign song name from user input to variable for search  
@@ -116,6 +117,19 @@ function spotifier() {
         console.log(song);
         console.log('true');
     }
+
+
+    Spotify.search({ type: 'track', query: nodeArgs2 }, function(err, data) {
+        if (err) {
+            console.log('Error occurred: ' + err);
+            return;
+        } else {
+            console.log(JSON.parse(data));
+            console.log('song found!');
+            console.log(JSON.parse(data).tracks.items[0].preview_url);
+        }
+        // Do something with 'data' 
+    });
 
 }
 
