@@ -8,7 +8,6 @@ var fs = require('fs');
 var nodeArgs1 = process.argv[2];
 var nodeArgs2 = process.argv[3];
 
-
 //create a series of functions executed based on the user's input using their first input parameter
 switch (nodeArgs1) {
     case 'my-tweets':
@@ -29,7 +28,6 @@ switch (nodeArgs1) {
         //if no user input for the arguments play the song "Maybe IDK"
         nodeArgs2 = ("Maybe IDK")
         spotifier(nodeArgs2);
-
 }
 
 //function to display 20 tweets from Twitter with their creation date and time
@@ -67,7 +65,6 @@ function tweeter() {
 // * Plot of the movie.
 // * Actors in the movie.
 // * Rotten Tomatoes Rating.
-
 function moviegoer() {
     var movie = "";
     //check for user input
@@ -79,7 +76,6 @@ function moviegoer() {
         //assign movie name from user input to variable for search
         movie = nodeArgs2;
     }
-
     request("http://www.omdbapi.com/?t=" + nodeArgs2 + "&y=&plot=short&r=json", function(error, response, body) {
         if (!error && response.statusCode === 200) {
             console.log("Movie name: " + JSON.parse(body).Title);
@@ -90,7 +86,6 @@ function moviegoer() {
             console.log("Movie plot: " + JSON.parse(body).Plot);
             console.log("Movie actors: " + JSON.parse(body).Actors);
             //add a check to see if there is a rotten tomatoes rating for this movie
-
             if (JSON.parse(body).Ratings !== undefined && JSON.parse(body).Ratings.length > 1) {
                 console.log("Movie Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
             } else {
@@ -103,31 +98,26 @@ function moviegoer() {
 //function to grab user input song name from Spotify and play it
 function spotifier() {
     var song = "";
-    console.log('spotifier');
+    //console.log('spotifier');
     //check for user input
     if (nodeArgs2 === undefined) {
         //if no user input for song, assign a song
         song = ("The Sign");
         nodeArgs2 = song;
-        console.log(nodeArgs2);
-        console.log('false');
+        i = 14
     } else {
         //assign song name from user input to variable for search  
+        i = 0
         song = nodeArgs2;
-        console.log(song);
-        console.log('true');
     }
-
-
     Spotify.search({ type: 'track', query: nodeArgs2 }, function(err, data) {
         if (err) {
             console.log('Error occurred: ' + err);
             return;
         } else {
-            console.log(data.tracks.items[14].preview_url);
+            console.log(data.tracks.items[i].preview_url);
         }
     });
-
 }
 
 //function to grab data from random.txt to be used as parameters called in the appropriate function
