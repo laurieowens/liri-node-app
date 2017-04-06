@@ -124,11 +124,8 @@ function spotifier() {
             console.log('Error occurred: ' + err);
             return;
         } else {
-            console.log(JSON.parse(data));
-            console.log('song found!');
-            console.log(JSON.parse(data).tracks.items[0].preview_url);
+            console.log(data.tracks.items[14].preview_url);
         }
-        // Do something with 'data' 
     });
 
 }
@@ -138,18 +135,8 @@ function randomTxt() {
     fs.readFile("random.txt", "utf8", function(error, data) {
         //split data from random.txt using comma and store in an Array for use as parameters for function call
         var dataArr = data.split(",");
-        console.log(dataArr);
-        console.log(dataArr[0], dataArr[1]);
         nodeArgs1 = (dataArr[0]);
         nodeArgs2 = (dataArr[1]);
-
-        // for (i = 0; i < dataArr.length; i++) {
-        //nodeArgs1 = (dataArr[i]);
-        // nodeArgs2 = (dataArr[i]);
-        // }
-        console.log(nodeArgs1);
-        console.log(nodeArgs2);
-
         spotifier(nodeArgs2)
 
     });
