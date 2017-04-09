@@ -95,11 +95,14 @@ function moviegoer() {
     });
 }
 
-//function to grab user input song name from Spotify and play it
+//function to grab user input song name from Spotify and display:
+//  Artist(s)
+//  The song's name
+//  A preview link of the song from Spotify
+//  The album that the song is from
 function spotifier() {
     var song = "";
     var artist = "";
-    //console.log('spotifier');
     //check for user input
     if (nodeArgs2 === undefined) {
         //if no user input for song, assign a song
@@ -117,7 +120,10 @@ function spotifier() {
             console.log('Error occurred: ' + err);
             return;
         } else {
+            //console.log(data.tracks.items[i].artists[i].name)
+            console.log(data.tracks.items[i].name);
             console.log(data.tracks.items[i].preview_url);
+            console.log(data.tracks.items[i].album.name);
         }
     });
 }
