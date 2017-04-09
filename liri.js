@@ -98,17 +98,19 @@ function moviegoer() {
 //function to grab user input song name from Spotify and play it
 function spotifier() {
     var song = "";
+    var artist = "";
     //console.log('spotifier');
     //check for user input
     if (nodeArgs2 === undefined) {
         //if no user input for song, assign a song
         song = ("The Sign");
+        artist = ("Ace of Base");
         nodeArgs2 = song;
-        i = 14
+        i = 15;
     } else {
         //assign song name from user input to variable for search  
-        i = 0
-        song = nodeArgs2;
+        i = 0;
+        // song = nodeArgs2;
     }
     Spotify.search({ type: 'track', query: nodeArgs2 }, function(err, data) {
         if (err) {
